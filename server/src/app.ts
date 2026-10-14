@@ -4,6 +4,7 @@ import helmet from "helmet";
 import { env } from "./config/env";
 import mongoose from "mongoose";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler";
+import noteRoutes from "./routes/noteRoutes";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/health", (_req, res) => {
     db: dbConnected ? "connected" : "disconnected",
   });
 });
+app.use("/api/notes", noteRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
