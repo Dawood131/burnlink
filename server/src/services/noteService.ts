@@ -25,7 +25,7 @@ export const openNote = async (id: string) => {
   // Try to burn a "view" note in ONE atomic step:
   // find it + mark viewed + erase content, and return the OLD document.
   const burned = await Note.findOneAndUpdate(
-    { publicId: id, burnAfter: "view", viewed: false, expiresAt: { $gt: now } },
+    { publicId: id, burnAfter: "view", viewed: { $ne: true }, expiresAt: { $gt: now } },
     { $set: { viewed: true, content: "" } },
     { returnDocument: "before" }
   );
