@@ -1,5 +1,19 @@
-function App() {
-  return <h1 className="p-8 text-3xl font-bold text-blue-600">BurnLink</h1>;
-}
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import HomePage from "./pages/HomePage";
+import ViewNotePage from "./pages/ViewNotePage";
+import HowItWorksPage from "./pages/HowItWorksPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
-export default App;
+export default function App() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/n/:id" element={<ViewNotePage />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
+  );
+}
